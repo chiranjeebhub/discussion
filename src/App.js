@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Home from "./pages/Home";
+import "antd/dist/antd.css";
+import { useState } from "react";
+
+import { MyContext } from "./Context";
 
 function App() {
+  const [showProfile, setShowProfile] = useState(false);
+  const value = { showProfile, setShowProfile };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ background: "lightgray", height: "100vh" }}>
+      <MyContext.Provider value={value}>
+        <Home />
+      </MyContext.Provider>
     </div>
   );
 }
