@@ -125,7 +125,7 @@ const Home = () => {
 
   return (
     <>
-      {localStorage.getItem("token") ? (
+      {!localStorage.getItem("token") ? (
         <Row>
           <Col span={4} style={{ background: "white", height: "100vh" }}>
             <Space style={{ fontSize: "30px", padding: "20px" }}>
