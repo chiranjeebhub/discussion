@@ -1,4 +1,14 @@
-import { Card, Col, Divider, Input, Progress, Row, Space } from "antd";
+import {
+  Card,
+  Col,
+  Divider,
+  Input,
+  Progress,
+  Row,
+  Space,
+  Menu,
+  Dropdown,
+} from "antd";
 
 import React, { useState, useContext } from "react";
 
@@ -16,6 +26,7 @@ import {
   PlayCircleFilled,
   FastBackwardFilled,
   FastForwardFilled,
+  BellOutlined,
 } from "@ant-design/icons";
 import AudioPost from "../components/AudioPost";
 import Login from "./Login";
@@ -76,52 +87,22 @@ const AudioPosts = [
   },
 ];
 
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="https://www.antgroup.com">👋 This is the first Notification.</a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <a href="https://www.antgroup.com">👋 This is the 2nd Notification.</a>
+    </Menu.Item>
+    <Menu.Item key="2">
+      <a href="https://www.antgroup.com">👋 This is the 3rd Notification.</a>
+    </Menu.Item>
+  </Menu>
+);
+
 const Home = () => {
   const { showProfile, setShowProfile } = useContext(MyContext);
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
   return (
     <>
@@ -201,12 +182,26 @@ const Home = () => {
             )}
           </Col>
           <Col span={6} style={{ background: "white", height: "100vh" }}>
-            <div style={{ padding: "10px", paddingTop: "30px" }}>
+            <div
+              style={{
+                padding: "10px",
+                paddingTop: "30px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <Input
                 type="search"
                 style={{ borderRadius: "30px" }}
                 placeholder="Search..."
               />
+              &nbsp;&nbsp;&nbsp;
+              <Dropdown overlay={menu} trigger={["click"]}>
+                <BellOutlined
+                  style={{ fontSize: "20px", fontWeight: "bold" }}
+                />
+              </Dropdown>
+              &nbsp;
             </div>
             <div
               style={{
