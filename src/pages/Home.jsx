@@ -8,6 +8,8 @@ import {
   Space,
   Menu,
   Dropdown,
+  Avatar,
+  Button,
 } from "antd";
 
 import React, { useState, useContext } from "react";
@@ -32,6 +34,7 @@ import AudioPost from "../components/AudioPost";
 import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
+import Discover from "./Discover";
 
 const AudioPosts = [
   {
@@ -102,7 +105,264 @@ const menu = (
 );
 
 const Home = () => {
-  const { showProfile, setShowProfile } = useContext(MyContext);
+  const { showProfile, setShowProfile, showExplore, setShowExplore } =
+    useContext(MyContext);
+
+  const conditionalMiddleSection = () => {
+    if (showProfile) {
+      return (
+        <div style={{ overflowY: "scroll", height: "100vh" }}>
+          <Profile />
+        </div>
+      );
+    } else if (showExplore) {
+      return <Discover />;
+    } else {
+      return (
+        <>
+          <Nav />
+          <div style={{ overflowY: "scroll", height: "90vh" }}>
+            {AudioPosts.map((item) => {
+              return (
+                <div>
+                  <AudioPost item={item} />
+                </div>
+              );
+            })}
+          </div>
+        </>
+      );
+    }
+  };
+
+  const conditional3rdseaction = () => {
+    if (showProfile) {
+      return (
+        <>
+          <div
+            style={{
+              padding: "10px",
+              paddingTop: "30px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Input
+              type="search"
+              style={{ borderRadius: "30px" }}
+              placeholder="Search..."
+            />
+            &nbsp;&nbsp;&nbsp;
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <BellOutlined style={{ fontSize: "20px", fontWeight: "bold" }} />
+            </Dropdown>
+            &nbsp;
+          </div>
+          <div
+            style={{
+              // fontWeight: "600",
+
+              padding: "20px",
+              borderRadius: "10px",
+              background: "#EBF4F8",
+              margin: "10px",
+            }}
+          >
+            <div style={{ fontSize: "20px" }}>#TrendingTracks</div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                1. My thoughts on Budget 2022
+              </span>
+              <br />
+              <small>
+                Finance Minister has announced budget 2022. My Thoughts on it.
+              </small>
+            </div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                2. What is Virtual Digital Asset.
+              </span>
+              <br />
+              <small>
+                Let's discuss what's Virtual Digital Asset (VDA) and it's tax
+                implications
+              </small>
+            </div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                3. Crypto will be taxed at 30%.
+              </span>
+              <br />
+              <small>
+                Major announcement on crypto tax. My thoughts on its
+                implications.
+              </small>
+            </div>
+          </div>
+          <div
+            style={{
+              // fontWeight: "600",
+
+              padding: "20px",
+              borderRadius: "10px",
+              background: "#EBF4F8",
+              margin: "10px",
+            }}
+          >
+            <div style={{ fontSize: "18px", fontWeight: "600" }}>
+              Who To Follow
+            </div>
+            <br />
+            {AudioPosts.map((item) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Avatar src={item.userAvatar} />
+                    <div style={{ fontWeight: "bold" }}>
+                      &nbsp;&nbsp;{item.userName}
+                    </div>{" "}
+                  </div>
+                  <div>
+                    <Button>Follow</Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      );
+    } else if (showExplore) {
+      return (
+        <>
+          <div
+            style={{
+              // fontWeight: "600",
+
+              padding: "20px",
+              borderRadius: "10px",
+              background: "#EBF4F8",
+              margin: "10px",
+            }}
+          >
+            <div style={{ fontSize: "18px", fontWeight: "600" }}>
+              Who To Follow
+            </div>
+            <br />
+            {AudioPosts.map((item) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "10px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingBottom: "10px",
+                    }}
+                  >
+                    <Avatar src={item.userAvatar} />
+                    <div style={{ fontWeight: "bold" }}>
+                      &nbsp;&nbsp;{item.userName}
+                    </div>{" "}
+                  </div>
+                  <div>
+                    <Button>Follow</Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div
+            style={{
+              padding: "10px",
+              paddingTop: "30px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Input
+              type="search"
+              style={{ borderRadius: "30px" }}
+              placeholder="Search..."
+            />
+            &nbsp;&nbsp;&nbsp;
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <BellOutlined style={{ fontSize: "20px", fontWeight: "bold" }} />
+            </Dropdown>
+            &nbsp;
+          </div>
+          <div
+            style={{
+              // fontWeight: "600",
+
+              padding: "20px",
+              borderRadius: "10px",
+              background: "#EBF4F8",
+              margin: "10px",
+            }}
+          >
+            <div style={{ fontSize: "20px" }}>#TrendingTracks</div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                1. My thoughts on Budget 2022
+              </span>
+              <br />
+              <small>
+                Finance Minister has announced budget 2022. My Thoughts on it.
+              </small>
+            </div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                2. What is Virtual Digital Asset.
+              </span>
+              <br />
+              <small>
+                Let's discuss what's Virtual Digital Asset (VDA) and it's tax
+                implications
+              </small>
+            </div>
+            <br />
+            <div>
+              <span style={{ fontWeight: "700" }}>
+                3. Crypto will be taxed at 30%.
+              </span>
+              <br />
+              <small>
+                Major announcement on crypto tax. My thoughts on its
+                implications.
+              </small>
+            </div>
+          </div>
+        </>
+      );
+    }
+  };
 
   return (
     <>
@@ -127,6 +387,7 @@ const Home = () => {
             </Space>
             <br />
             <Space
+              onClick={(e) => setShowExplore(true)}
               style={{
                 fontSize: "20px",
                 paddingLeft: "20px",
@@ -162,91 +423,10 @@ const Home = () => {
           </Col>
 
           <Col span={14} style={{ background: "#EBF4F9", height: "100vh" }}>
-            {showProfile ? (
-              <div style={{ overflowY: "scroll", height: "100vh" }}>
-                <Profile />
-              </div>
-            ) : (
-              <>
-                <Nav />
-                <div style={{ overflowY: "scroll", height: "90vh" }}>
-                  {AudioPosts.map((item) => {
-                    return (
-                      <div>
-                        <AudioPost item={item} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+            {conditionalMiddleSection()}
           </Col>
           <Col span={6} style={{ background: "white", height: "100vh" }}>
-            <div
-              style={{
-                padding: "10px",
-                paddingTop: "30px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Input
-                type="search"
-                style={{ borderRadius: "30px" }}
-                placeholder="Search..."
-              />
-              &nbsp;&nbsp;&nbsp;
-              <Dropdown overlay={menu} trigger={["click"]}>
-                <BellOutlined
-                  style={{ fontSize: "20px", fontWeight: "bold" }}
-                />
-              </Dropdown>
-              &nbsp;
-            </div>
-            <div
-              style={{
-                // fontWeight: "600",
-
-                padding: "20px",
-                borderRadius: "10px",
-                background: "#EBF4F8",
-                margin: "10px",
-              }}
-            >
-              <div style={{ fontSize: "20px" }}>#TrendingTracks</div>
-              <br />
-              <div>
-                <span style={{ fontWeight: "700" }}>
-                  1. My thoughts on Budget 2022
-                </span>
-                <br />
-                <small>
-                  Finance Minister has announced budget 2022. My Thoughts on it.
-                </small>
-              </div>
-              <br />
-              <div>
-                <span style={{ fontWeight: "700" }}>
-                  2. What is Virtual Digital Asset.
-                </span>
-                <br />
-                <small>
-                  Let's discuss what's Virtual Digital Asset (VDA) and it's tax
-                  implications
-                </small>
-              </div>
-              <br />
-              <div>
-                <span style={{ fontWeight: "700" }}>
-                  3. Crypto will be taxed at 30%.
-                </span>
-                <br />
-                <small>
-                  Major announcement on crypto tax. My thoughts on its
-                  implications.
-                </small>
-              </div>
-            </div>
+            {conditional3rdseaction()}
 
             {/* <div style={{ padding: "20px" }}>
               <img
