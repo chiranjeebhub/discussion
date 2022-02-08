@@ -1,6 +1,6 @@
-import { Col, Divider, Row, Space, Tag } from "antd";
+import { Col, Divider, Row, Space, Tag, Button } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
-import React from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 
 import {
@@ -9,9 +9,36 @@ import {
   ShareAltOutlined,
   MoreOutlined,
   SettingOutlined,
+  PlayCircleTwoTone,
+  PauseCircleTwoTone,
 } from "@ant-design/icons";
 
-const AudioPost = ({ item }) => {
+const AudioPost = ({ item, index, AudioPosts }) => {
+  const [playing, setPlaying] = useState(null);
+  const [playingTrack, setPlayingTrack] = useState(null);
+
+  const conditionalPlay = (item1, index1) => {
+    setPlayingTrack(null);
+    setPlayingTrack(AudioPosts[index1]);
+    conditionalPause(item, index);
+    setPlaying(false);
+    console.log(index, index1, "kjbdkwjbekwe");
+    if (index1 === index) {
+      setPlaying(true);
+    } else {
+      setPlaying(false);
+    }
+  };
+
+  const conditionalPause = (item2, index2) => {
+    setPlaying(false);
+    // if (index2 === index) {
+    //   setPlaying(false);
+    // } else {
+    //   setPlaying(true);
+    // }
+  };
+
   return (
     <div
       style={{
@@ -52,14 +79,45 @@ const AudioPost = ({ item }) => {
           />
         </Col>
         <Col span={18}>
-          <ReactPlayer
+          <div>
+            <ReactPlayer
+              url={item.trackLink}
+              style={{ display: "none" }}
+              controls={false}
+              playing={playing}
+              wrapper={"audio"}
+              progressInterval={200}
+              config={{
+                file: {
+                  attributes: { preload: "auto" },
+                  forceAudio: true,
+                },
+              }}
+            />
+            <Button
+              type="primary"
+              icon={
+                playing ? (
+                  <PauseCircleTwoTone
+                    onClick={() => conditionalPause(item, index)}
+                  />
+                ) : (
+                  <PlayCircleTwoTone
+                    onClick={() => conditionalPlay(item, index)}
+                  />
+                )
+              }
+            />
+          </div>
+          {/* <ReactPlayer
             forceAudio
             url={item.trackLink}
             width="100%"
             height="50px"
-            playing={false}
-            controls={true}
+            playing={playing === index ? true : false}
+            controls={false}
           />
+          <Button onclick={(e) => setPlaying(index)}>click to play</Button> */}
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div
               style={{

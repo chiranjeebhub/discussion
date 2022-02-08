@@ -122,10 +122,14 @@ const Home = () => {
         <>
           <Nav />
           <div style={{ overflowY: "scroll", height: "90vh" }}>
-            {AudioPosts.map((item) => {
+            {AudioPosts.map((item, index) => {
               return (
                 <div>
-                  <AudioPost item={item} />
+                  <AudioPost
+                    item={item}
+                    index={index}
+                    AudioPosts={AudioPosts}
+                  />
                 </div>
               );
             })}
