@@ -29,12 +29,17 @@ import {
   FastBackwardFilled,
   FastForwardFilled,
   BellOutlined,
+  SettingTwoTone,
+  BellTwoTone,
+  CompassTwoTone,
+  SmileTwoTone,
 } from "@ant-design/icons";
 import AudioPost from "../components/AudioPost";
 import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
 import Discover from "./Discover";
+import SettingsMiddleSection from "../components/SettingsMiddleSection";
 
 const AudioPosts = [
   {
@@ -105,8 +110,14 @@ const menu = (
 );
 
 const Home = () => {
-  const { showProfile, setShowProfile, showExplore, setShowExplore } =
-    useContext(MyContext);
+  const {
+    showProfile,
+    setShowProfile,
+    showExplore,
+    setShowExplore,
+    showSettings,
+    setShowSettings,
+  } = useContext(MyContext);
 
   const conditionalMiddleSection = () => {
     if (showProfile) {
@@ -117,6 +128,12 @@ const Home = () => {
       );
     } else if (showExplore) {
       return <Discover />;
+    } else if (showSettings) {
+      return (
+        <div>
+          <SettingsMiddleSection />
+        </div>
+      );
     } else {
       return (
         <>
@@ -158,7 +175,7 @@ const Home = () => {
             />
             &nbsp;&nbsp;&nbsp;
             <Dropdown overlay={menu} trigger={["click"]}>
-              <BellOutlined style={{ fontSize: "20px", fontWeight: "bold" }} />
+              <BellTwoTone style={{ fontSize: "20px", fontWeight: "bold" }} />
             </Dropdown>
             &nbsp;
           </div>
@@ -297,6 +314,12 @@ const Home = () => {
           </div>
         </>
       );
+    } else if (showSettings) {
+      return (
+        <>
+          <SettingsMiddleSection />
+        </>
+      );
     } else {
       return (
         <>
@@ -315,7 +338,7 @@ const Home = () => {
             />
             &nbsp;&nbsp;&nbsp;
             <Dropdown overlay={menu} trigger={["click"]}>
-              <BellOutlined style={{ fontSize: "20px", fontWeight: "bold" }} />
+              <BellTwoTone style={{ fontSize: "20px", fontWeight: "bold" }} />
             </Dropdown>
             &nbsp;
           </div>
@@ -386,8 +409,8 @@ const Home = () => {
                 paddingTop: "15px",
               }}
             >
-              <BiUser style={{ marginTop: "10px" }} />
-              <div style={{ fontWeight: "500" }}>profile</div>
+              <SmileTwoTone style={{ marginTop: "10px" }} />
+              <div style={{ fontWeight: "500", color: "gray" }}>profile</div>
             </Space>
             <br />
             <Space
@@ -398,9 +421,9 @@ const Home = () => {
                 paddingTop: "15px",
               }}
             >
-              <BiHash style={{ marginTop: "10px" }} />
+              <CompassTwoTone style={{ marginTop: "10px" }} />
               {/* <MdOutlineShoppingCart style={{ marginTop: "10px" }} /> */}
-              <div style={{ fontWeight: "500" }}>explore</div>
+              <div style={{ fontWeight: "500", color: "gray" }}>explore</div>
             </Space>
             <br />
             <Space
@@ -410,8 +433,23 @@ const Home = () => {
                 paddingTop: "15px",
               }}
             >
-              <BiBell style={{ marginTop: "10px" }} />
-              <div style={{ fontWeight: "500" }}>notifications</div>
+              <BellTwoTone style={{ marginTop: "10px" }} />
+              <div style={{ fontWeight: "500", color: "gray" }}>
+                notifications
+              </div>
+            </Space>
+
+            <br />
+            <Space
+              onClick={(e) => setShowSettings(true)}
+              style={{
+                fontSize: "20px",
+                paddingLeft: "20px",
+                paddingTop: "15px",
+              }}
+            >
+              <SettingTwoTone style={{ marginTop: "10px" }} />
+              <div style={{ fontWeight: "500", color: "gray" }}>settings</div>
             </Space>
             {/* <br />
           <Space

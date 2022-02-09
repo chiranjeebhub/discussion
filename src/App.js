@@ -9,7 +9,15 @@ import { MyContext } from "./Context";
 function App() {
   const [showProfile, setShowProfile] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
-  const value = { showProfile, setShowProfile, showExplore, setShowExplore };
+  const [showSettings, setShowSettings] = useState(false);
+  const value = {
+    showProfile,
+    setShowProfile,
+    showExplore,
+    setShowExplore,
+    showSettings,
+    setShowSettings,
+  };
   return (
     <div style={{ background: "lightgray", height: "100vh" }}>
       <MyContext.Provider value={value}>
